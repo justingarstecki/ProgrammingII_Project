@@ -1,69 +1,47 @@
 # ProgrammingII_Project
---------------------------------------------------------
----------------------------------------------------------
-- currentResult : double
- + Calculator()                                  
- + add(a: double, b: double) : double             
- + subtract(a: double, b: double) : double        
- + multiply(a: double, b: double) : double        
- + divide(a: double, b: double) : double
-   
-                  ^
-                  |
-                  |
-           AdvancedCalculator
-      + sine(value: double) : double
-  + cosine(value: double) : double
-  + logarithm(value: double) : double
-   +  + squareRoot(value: double) : double
-------------------------------------------------------
-----------------------------------------------------
+## UML Diagram
 
-                 ExpressionParser 
-                 
-                expression : string 
-+ parseExpression() : void
-+ evaluateExpression() : double
-                  |
-                  v
-                  Calculator    
---------------------------------------------------------
------------------------------------------------------
-                 HistoryManager 
-     
-     historyList : vector<string>   
-  + addRecord(record: string) : void     
- + displayHistory() : void
- + saveToFile() : void
- + loadFromFile() : void
+```mermaid
+classDiagram
+    class Calculator {
+        -double currentResult
+        +Calculator()
+        +double add(double a, double b)
+        +double subtract(double a, double b)
+        +double multiply(double a, double b)
+        +double divide(double a, double b)
+    }
 
---------------------------------------------------------
---------------------------------------------------------
-                     UserInterface   
+    class AdvancedCalculator {
+        +double sine(double value)
+        +double cosine(double value)
+        +double logarithm(double value)
+        +double squareRoot(double value)
+    }
 
- + displayMenu() : void  
- + getInput() : string 
- + showResult(result: double) : void
+    class ExpressionParser {
+        -string expression
+        +void parseExpression()
+        +double evaluateExpression()
+    }
 
-                          |
-                          | interacts with
-                          v
-  
-  Calculator / AdvancedCalculator / Parser /      
-  HistoryManager 
-  ----------------------------------------------------
-  ---------------------------------------------------
-  
-Relationships:
-- AdvancedCalculator inherits from Calculator
-- ExpressionParser uses Calculator to evaluate expressions
-- HistoryManager stores previous calculations
-- UserInterface interacts with all major classes
+    class HistoryManager {
+        -vector~string~ historyList
+        +void addRecord(string record)
+        +void displayHistory()
+        +void saveToFile()
+        +void loadFromFile()
+    }
 
-   
+    class UserInterface {
+        +void displayMenu()
+        +string getInput()
+        +void showResult(double result)
+    }
 
-
-
-              
-                  
-                 
+    AdvancedCalculator --|> Calculator
+    ExpressionParser --> Calculator : uses
+    UserInterface --> Calculator : interacts
+    UserInterface --> AdvancedCalculator : interacts
+    UserInterface --> ExpressionParser : interacts
+    UserInterface --> HistoryManager : interacts
