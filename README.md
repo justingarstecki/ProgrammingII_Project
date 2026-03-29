@@ -1,7 +1,7 @@
 # ProgrammingII_Project
 ## UML Diagram
 
-
+```mermaid
 classDiagram
     class Calculator {
         -double currentResult
