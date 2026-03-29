@@ -7,7 +7,9 @@
  + subtract(a: double, b: double) : double        
  + multiply(a: double, b: double) : double        
  + divide(a: double, b: double) : double
+   
                   ^
+                  |
                   |
            AdvancedCalculator
       + sine(value: double) : double
@@ -18,17 +20,19 @@
 ----------------------------------------------------
 
                  ExpressionParser 
-               - expression : string 
+                 
+                expression : string 
 + parseExpression() : void
 + evaluateExpression() : double
                   |
                   v
-              Calculator    
+                  Calculator    
 --------------------------------------------------------
 -----------------------------------------------------
-                      HistoryManager 
-               - historyList : vector<string>   
-               + addRecord(record: string) : void     
+                 HistoryManager 
+     
+     historyList : vector<string>   
+  + addRecord(record: string) : void     
  + displayHistory() : void
  + saveToFile() : void
  + loadFromFile() : void
