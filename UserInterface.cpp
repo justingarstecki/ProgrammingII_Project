@@ -1,5 +1,7 @@
 #include <iostream>
 #include "HistoryManager.h"
+#include "UserInterface.h"
+#include "ExpressionParser.h"
 
 void showMenu() {
     std::cout << "\n=== Menu ===\n";
