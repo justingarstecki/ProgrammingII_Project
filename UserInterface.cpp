@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include "HistoryManager.h"
 #include "UserInterface.h"
 #include "ExpressionParser.h"
