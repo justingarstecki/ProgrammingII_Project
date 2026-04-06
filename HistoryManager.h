@@ -1,3 +1,4 @@
+#pragma once
 #include <vector>
 #include <string>
 
@@ -12,8 +13,11 @@ public:
     // Add entry to history
     void addEntry(const std::string& entry);
 
-    // Display history
-    void displayHistory() const;
+    // Get all history enteries 
+    std::vector<std::string> getHistory() const;
+
+    // Get number of enteries
+    size_t getHistorySize() const;
 
     // Clear history
     void clearHistory();
