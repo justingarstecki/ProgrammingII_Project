@@ -1,6 +1,3 @@
-#ifndef HISTORY_MANAGER_H
-#define HISTORY_MANAGER_H
-
 #include <vector>
 #include <string>
 
@@ -21,5 +18,3 @@ public:
     // Clear history
     void clearHistory();
 };
-
-#endif
