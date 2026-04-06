@@ -9,12 +9,14 @@ void HistoryManager::addEntry(const std::string& entry) {
     history.push_back(entry);
 }
 
-// Display history
-void HistoryManager::displayHistory() const {
-    for (const auto& item : history) {
-        std::cout << item << std::endl;
-    }
+// Return full history
+std::vector<std::string> HistoryManager::getHistory() const {
+    return history;
 }
+
+// Return history size
+size_t HistoryManager::getHistorySize() const {
+    return history.size();
 
 // Clear history
 void HistoryManager::clearHistory() {
