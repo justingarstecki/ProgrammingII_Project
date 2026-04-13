@@ -1,4 +1,5 @@
 #include "Calculator.h"
+#include <stdexcept>
 
 //Basic arithmetic operations
 double Calculator::add(double a, double b) {
@@ -15,7 +16,7 @@ double Calculator::multiply(double a, double b) {
 
 double Calculator::divide(double a, double b) {
     if (b == 0) {
-        throw std::runtime_error("Division by zero");
+        throw std::runtime_error("Error: Division by zero is not allowed.");
     }
     return a / b;
 }
