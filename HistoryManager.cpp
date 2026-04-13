@@ -1,24 +1,25 @@
 #include "HistoryManager.h"
 #include <iostream>
 
-// Constructor
+//Constructor
 HistoryManager::HistoryManager() {}
 
-// Add entry
+//Add entry
 void HistoryManager::addEntry(const std::string& entry) {
-    history.push_back(entry);
+    historyList.push_back(entry);
 }
 
-// Return full history
+//Return full history
 std::vector<std::string> HistoryManager::getHistory() const {
-    return history;
+    return historyList;
 }
 
-// Return history size
+//Return history size
 size_t HistoryManager::getHistorySize() const {
-    return history.size();
+    return historyList.size();
+}
 
-// Clear history
+//Clear history
 void HistoryManager::clearHistory() {
-    history.clear();
+    historyList.clear();
 }
