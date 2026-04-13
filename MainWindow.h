@@ -3,39 +3,40 @@
 
 #include <QWidget>
 #include <QLineEdit>
-#include <QPushButton>
 #include <QLabel>
 #include <QListWidget>
+#include <QPushButton>
 
 #include "ExpressionParser.h"
 #include "HistoryManager.h"
 #include "AdvancedCalculator.h"
 
-class MainWindow : public QWidget {
+class MainWindow : public QWidget
+{
     Q_OBJECT
 
 public:
     MainWindow(QWidget *parent = nullptr);
 
 private slots:
-    void numberClicked();
+    void buttonClicked();
     void operatorClicked();
-    void calculateClicked();
-    void clearClicked();
-    void clearHistoryClicked();
-    void sinClicked();
-    void cosClicked();
-    void logClicked();
-    void sqrtClicked();
+    void calculate();
+    void clearInput();
+    void clearHistory();
+    void doSin();
+    void doCos();
+    void doLog();
+    void doSqrt();
 
 private:
-    QLineEdit *input;
-    QLabel *result;
-    QListWidget *historyBox;
+    QLineEdit *inputBox;
+    QLabel *resultLabel;
+    QListWidget *historyList;
 
     ExpressionParser parser;
     HistoryManager history;
-    AdvancedCalculator advCalc;
+    AdvancedCalculator calc;
 };
 
 #endif
