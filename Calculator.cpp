@@ -15,7 +15,7 @@ double Calculator::multiply(double a, double b) {
 
 double Calculator::divide(double a, double b) {
     if (b == 0) {
-        return 0; //error handling for divide by zero
+        throw std::runtime_error("Division by zero");
     }
     return a / b;
 }
