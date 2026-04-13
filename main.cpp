@@ -1,10 +1,11 @@
-#include <iostream>
-#include "UserInterface.h"
+#include <QApplication>
+#include "MainWindow.h"
 
-int main() {
-    UserInterface ui;
+int main(int argc, char *argv[]) {
+    QApplication app(argc, argv);
 
-    ui.displayMenu();
+    MainWindow window;
+    window.show();
 
-    return 0;
+    return app.exec();
 }
