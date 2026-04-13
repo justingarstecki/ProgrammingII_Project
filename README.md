@@ -1,11 +1,5 @@
-# ProgrammingII_Project
-## UML Diagram
-
-```mermaid
 classDiagram
     class Calculator {
-        -double currentResult
-        +Calculator()
         +double add(double a, double b)
         +double subtract(double a, double b)
         +double multiply(double a, double b)
@@ -21,27 +15,34 @@ classDiagram
 
     class ExpressionParser {
         -string expression
-        +void parseExpression()
+        +void setExpression(string expr)
         +double evaluateExpression()
     }
 
     class HistoryManager {
         -vector~string~ historyList
-        +void addRecord(string record)
-        +void displayHistory()
-        +void saveToFile()
-        +void loadFromFile()
+        +void addEntry(string entry)
+        +vector~string~ getHistory()
+        +void clearHistory()
     }
 
-    class UserInterface {
-        +void displayMenu()
-        +string getInput()
-        +void showResult(double result)
+    class MainWindow {
+        -QLineEdit inputBox
+        -QLabel resultLabel
+        -QListWidget historyList
+        +buttonClicked()
+        +operatorClicked()
+        +calculate()
+        +clearInput()
+        +clearHistory()
+        +doSin()
+        +doCos()
+        +doLog()
+        +doSqrt()
     }
 
     AdvancedCalculator --|> Calculator
-    ExpressionParser --> Calculator : uses
-    UserInterface --> Calculator : interacts
-    UserInterface --> AdvancedCalculator : interacts
-    UserInterface --> ExpressionParser : interacts
-    UserInterface --> HistoryManager : interacts
+    ExpressionParser --> AdvancedCalculator : uses
+    MainWindow --> ExpressionParser : uses
+    MainWindow --> AdvancedCalculator : uses
+    MainWindow --> HistoryManager : uses
