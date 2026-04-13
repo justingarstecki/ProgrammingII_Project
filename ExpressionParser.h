@@ -9,7 +9,7 @@ private:
     std::string expression;
 
 public:
-    void setExpression(std::string expr) { expression = expr; }
+    void setExpression(const std::string& expr);
     double evaluateExpression();
 };
 
