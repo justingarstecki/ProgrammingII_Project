@@ -3,32 +3,48 @@
 #include <sstream>
 #include <stdexcept>
 
-void ExpressionParser::setExpression(const std::string& expr) {
+void ExpressionParser::setExpression(const std::string& expr)
+{
     expression = expr;
 }
 
-double ExpressionParser::evaluateExpression() {
-    double a, b;
-    char op;
-
+double ExpressionParser::evaluateExpression()
+{
     std::istringstream iss(expression);
-
-    if (!(iss >> a >> op >> b)) {
-        throw std::runtime_error("Invalid expression format. Use: number operator number");
-    }
-
     AdvancedCalculator calc;
 
-    switch (op) {
-        case '+':
-            return calc.add(a, b);
-        case '-':
-            return calc.subtract(a, b);
-        case '*':
-            return calc.multiply(a, b);
-        case '/':
-            return calc.divide(a, b);
-        default:
-            throw std::runtime_error("Invalid operator. Use +, -, *, or /");
+    double result;
+    if (!(iss >> result))
+    {
+        throw std::runtime_error("Invalid expression");
     }
+
+    char op;
+    double num;
+
+    while (iss >> op >> num)
+    {
+        if (op == '+')
+        {
+            result = calc.add(result, num);
+        }
+        else if (op == '-')
+        {
+            result = calc.subtract(result, num);
+        }
+        else if (op == '*')
+        {
+            result = calc.multiply(result, num);
+        }
+        else if (op == '/')
+        {
+            result = calc.divide(result, num);
+        }
+        else
+        {
+            throw std::runtime_error("Invalid operator");
+        }
+    }
+
+    return result;
 }
