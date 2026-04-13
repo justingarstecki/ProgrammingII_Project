@@ -1,21 +1,36 @@
 #include "ExpressionParser.h"
+#include "AdvancedCalculator.h"
 #include <sstream>
+#include <stdexcept>
 
 double ExpressionParser::evaluateExpression() {
-    double result = 0;
     double a, b;
     char op;
 
-    //Parsing for two numbers only
     std::istringstream iss(expression);
-    iss >> a >> op >> b;
 
-    //Use Calculator for the operation
-    Calculator calc;
-    if (op == '+') result = calc.add(a, b);
-    else if (op == '-') result = calc.subtract(a, b);
-    else if (op == '*') result = calc.multiply(a, b);
-    else if (op == '/') result = calc.divide(a, b);
+    // Validate input format
+    if (!(iss >> a >> op >> b)) {
+        throw std::runtime_error("Invalid expression format. Use: number operator number");
+    }
 
-    return result;
+    // Use AdvancedCalculator so project shows full OOP structure
+    AdvancedCalculator calc;
+
+    switch (op) {
+        case '+':
+            return calc.add(a, b);
+
+        case '-':
+            return calc.subtract(a, b);
+
+        case '*':
+            return calc.multiply(a, b);
+
+        case '/':
+            return calc.divide(a, b);
+
+        default:
+            throw std::runtime_error("Invalid operator. Use +, -, *, or /");
+    }
 }
