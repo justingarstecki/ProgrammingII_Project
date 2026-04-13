@@ -2,7 +2,8 @@
 #define ADVANCEDCALCULATOR_H
 
 #include "Calculator.h"
-#include <cmath> // for math functions like sin, cos, sqrt, log
+#include <cmath>
+#include <stdexcept>
 
 class AdvancedCalculator : public Calculator {
 public:
