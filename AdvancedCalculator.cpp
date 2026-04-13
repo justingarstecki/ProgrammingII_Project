@@ -1,7 +1,7 @@
 #include "AdvancedCalculator.h"
 #include <cmath>
+#include <stdexcept>
 
-//Advanced math functions
 double AdvancedCalculator::sine(double value) {
     return sin(value);
 }
@@ -12,14 +12,14 @@ double AdvancedCalculator::cosine(double value) {
 
 double AdvancedCalculator::logarithm(double value) {
     if (value <= 0) {
-        return 0; //error handling for log
+        throw std::runtime_error("Logarithm undefined for zero or negative values");
     }
     return log(value);
 }
 
 double AdvancedCalculator::squareRoot(double value) {
     if (value < 0) {
-        return 0; //error handling for negative numbers
+        throw std::runtime_error("Square root undefined for negative values");
     }
     return sqrt(value);
 }
