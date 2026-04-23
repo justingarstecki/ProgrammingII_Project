@@ -112,8 +112,12 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
     mainLayout->addWidget(historyList);
 
     QPushButton *clearHistoryButton = new QPushButton("Clear History");
+    QPushButton *viewHistoryButton = new QPushButton("View History");
     connect(clearHistoryButton, &QPushButton::clicked, this, &MainWindow::clearHistory);
+    connect(viewHistoryButton, &QPushButton::clicked, this, &MainWindow::viewHistory);
+    connect(historyList, &QListWidget::itemClicked, this, &MainWindow::historyItemClicked);
     mainLayout->addWidget(clearHistoryButton);
+    mainLayout->addWidget(viewHistoryButton);
 
     setLayout(mainLayout);
 }
@@ -142,6 +146,7 @@ void MainWindow::calculate()
 
         QString historyText = inputBox->text() + " = " + resultText;
         history.addEntry(historyText.toStdString());
+        allHistory.append(historyText);
         historyList->addItem(historyText);
     }
     catch (const std::exception &e)
@@ -160,6 +165,27 @@ void MainWindow::clearHistory()
 {
     history.clearHistory();
     historyList->clear();
+}
+
+void MainWindow::viewHistory()
+{
+    historyList->clear();
+
+    for (int i = 0; i < allHistory.size(); i++)
+    {
+        historyList->addItem(allHistory.at(i));
+    }
+}
+
+void MainWindow::historyItemClicked(QListWidgetItem *item)
+{
+    QString historyText = item->text();
+    int equalPosition = historyText.indexOf(" = ");
+
+    if (equalPosition != -1)
+    {
+        inputBox->setText(historyText.left(equalPosition));
+    }
 }
 
 void MainWindow::doSin()
