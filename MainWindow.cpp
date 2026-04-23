@@ -91,18 +91,21 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
     QPushButton *cosButton = new QPushButton("cos");
     QPushButton *logButton = new QPushButton("log");
     QPushButton *sqrtButton = new QPushButton("sqrt");
+    QPushButton *closeParenButton = new QPushButton(")");
 
     row->addWidget(equalButton);
     row->addWidget(sinButton);
     row->addWidget(cosButton);
     row->addWidget(logButton);
     row->addWidget(sqrtButton);
+    row->addWidget(closeParenButton);
 
     connect(equalButton, &QPushButton::clicked, this, &MainWindow::calculate);
     connect(sinButton, &QPushButton::clicked, this, &MainWindow::doSin);
     connect(cosButton, &QPushButton::clicked, this, &MainWindow::doCos);
     connect(logButton, &QPushButton::clicked, this, &MainWindow::doLog);
     connect(sqrtButton, &QPushButton::clicked, this, &MainWindow::doSqrt);
+    connect(closeParenButton, &QPushButton::clicked, this, &MainWindow::buttonClicked);
 
     mainLayout->addLayout(row);
 
@@ -161,98 +164,20 @@ void MainWindow::clearHistory()
 
 void MainWindow::doSin()
 {
-    bool ok;
-    double num = inputBox->text().toDouble(&ok);
-
-    if (ok)
-    {
-        double answer = calc.sine(num);
-        QString resultText = QString::number(answer);
-        resultLabel->setText("Result: " + resultText);
-
-        QString historyText = "sin(" + QString::number(num) + ") = " + resultText;
-        history.addEntry(historyText.toStdString());
-        historyList->addItem(historyText);
-    }
-    else
-    {
-        resultLabel->setText("Error: invalid input");
-    }
+    inputBox->setText(inputBox->text() + "sin(");
 }
 
 void MainWindow::doCos()
 {
-    bool ok;
-    double num = inputBox->text().toDouble(&ok);
-
-    if (ok)
-    {
-        double answer = calc.cosine(num);
-        QString resultText = QString::number(answer);
-        resultLabel->setText("Result: " + resultText);
-
-        QString historyText = "cos(" + QString::number(num) + ") = " + resultText;
-        history.addEntry(historyText.toStdString());
-        historyList->addItem(historyText);
-    }
-    else
-    {
-        resultLabel->setText("Error: invalid input");
-    }
+    inputBox->setText(inputBox->text() + "cos(");
 }
 
 void MainWindow::doLog()
 {
-    bool ok;
-    double num = inputBox->text().toDouble(&ok);
-
-    if (ok)
-    {
-        try
-        {
-            double answer = calc.logarithm(num);
-            QString resultText = QString::number(answer);
-            resultLabel->setText("Result: " + resultText);
-
-            QString historyText = "log(" + QString::number(num) + ") = " + resultText;
-            history.addEntry(historyText.toStdString());
-            historyList->addItem(historyText);
-        }
-        catch (const std::exception &e)
-        {
-            resultLabel->setText(QString("Error: ") + e.what());
-        }
-    }
-    else
-    {
-        resultLabel->setText("Error: invalid input");
-    }
+    inputBox->setText(inputBox->text() + "log(");
 }
 
 void MainWindow::doSqrt()
 {
-    bool ok;
-    double num = inputBox->text().toDouble(&ok);
-
-    if (ok)
-    {
-        try
-        {
-            double answer = calc.squareRoot(num);
-            QString resultText = QString::number(answer);
-            resultLabel->setText("Result: " + resultText);
-
-            QString historyText = "sqrt(" + QString::number(num) + ") = " + resultText;
-            history.addEntry(historyText.toStdString());
-            historyList->addItem(historyText);
-        }
-        catch (const std::exception &e)
-        {
-            resultLabel->setText(QString("Error: ") + e.what());
-        }
-    }
-    else
-    {
-        resultLabel->setText("Error: invalid input");
-    }
+    inputBox->setText(inputBox->text() + "sqrt(");
 }
