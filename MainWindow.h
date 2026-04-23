@@ -6,6 +6,8 @@
 #include <QLabel>
 #include <QListWidget>
 #include <QPushButton>
+#include <QListWidgetItem>
+#include <QStringList>
 
 #include "ExpressionParser.h"
 #include "HistoryManager.h"
@@ -24,6 +26,8 @@ private slots:
     void calculate();
     void clearInput();
     void clearHistory();
+    void viewHistory();
+    void historyItemClicked(QListWidgetItem *item);
     void doSin();
     void doCos();
     void doLog();
@@ -33,6 +37,7 @@ private:
     QLineEdit *inputBox;
     QLabel *resultLabel;
     QListWidget *historyList;
+    QStringList allHistory;
 
     ExpressionParser parser;
     HistoryManager history;
