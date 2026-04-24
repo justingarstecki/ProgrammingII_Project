@@ -41,7 +41,7 @@ private:
 
     ExpressionParser parser;
     HistoryManager history;
-    AdvancedCalculator calc;
+    Calculator* calc;
 };
 
 #endif
