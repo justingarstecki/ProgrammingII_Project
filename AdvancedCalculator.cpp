@@ -2,6 +2,27 @@
 #include <cmath>
 #include <stdexcept>
 
+// Basic operations
+double AdvancedCalculator::add(double a, double b) {
+    return a + b;
+}
+
+double AdvancedCalculator::subtract(double a, double b) {
+    return a - b;
+}
+
+double AdvancedCalculator::multiply(double a, double b) {
+    return a * b;
+}
+
+double AdvancedCalculator::divide(double a, double b) {
+    if (b == 0) {
+        throw std::runtime_error("Error: Division by zero is not allowed.");
+    }
+    return a / b;
+}
+
+// Advanced functions
 double AdvancedCalculator::sine(double value) {
     return sin(value);
 }
