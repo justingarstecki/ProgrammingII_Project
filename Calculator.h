@@ -11,4 +11,9 @@ public:
     virtual double divide(double a, double b) = 0;
 };
 
+template <typename T>
+T genericAdd(T a, T b) {
+    return a + b;
+}
+
 #endif
