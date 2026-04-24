@@ -2,14 +2,13 @@
 #define CALCULATOR_H
 
 class Calculator {
-private:
-    double currentResult;
-
 public:
-    double add(double a, double b);
-    double subtract(double a, double b);
-    double multiply(double a, double b);
-    double divide(double a, double b);
+    virtual ~Calculator() {}  // Virtual destructor
+
+    virtual double add(double a, double b) = 0;
+    virtual double subtract(double a, double b) = 0;
+    virtual double multiply(double a, double b) = 0;
+    virtual double divide(double a, double b) = 0;
 };
 
 #endif
