@@ -7,6 +7,8 @@
 
 MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
 {
+    calc = new AdvancedCalculator();
+
     setWindowTitle("Calculator");
     resize(400, 500);
 
@@ -91,21 +93,18 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
     QPushButton *cosButton = new QPushButton("cos");
     QPushButton *logButton = new QPushButton("log");
     QPushButton *sqrtButton = new QPushButton("sqrt");
-    QPushButton *closeParenButton = new QPushButton(")");
 
     row->addWidget(equalButton);
     row->addWidget(sinButton);
     row->addWidget(cosButton);
     row->addWidget(logButton);
     row->addWidget(sqrtButton);
-    row->addWidget(closeParenButton);
 
     connect(equalButton, &QPushButton::clicked, this, &MainWindow::calculate);
     connect(sinButton, &QPushButton::clicked, this, &MainWindow::doSin);
     connect(cosButton, &QPushButton::clicked, this, &MainWindow::doCos);
     connect(logButton, &QPushButton::clicked, this, &MainWindow::doLog);
     connect(sqrtButton, &QPushButton::clicked, this, &MainWindow::doSqrt);
-    connect(closeParenButton, &QPushButton::clicked, this, &MainWindow::buttonClicked);
 
     mainLayout->addLayout(row);
 
@@ -113,13 +112,20 @@ MainWindow::MainWindow(QWidget *parent) : QWidget(parent)
 
     QPushButton *clearHistoryButton = new QPushButton("Clear History");
     QPushButton *viewHistoryButton = new QPushButton("View History");
+
     connect(clearHistoryButton, &QPushButton::clicked, this, &MainWindow::clearHistory);
     connect(viewHistoryButton, &QPushButton::clicked, this, &MainWindow::viewHistory);
     connect(historyList, &QListWidget::itemClicked, this, &MainWindow::historyItemClicked);
+
     mainLayout->addWidget(clearHistoryButton);
     mainLayout->addWidget(viewHistoryButton);
 
     setLayout(mainLayout);
+}
+
+MainWindow::~MainWindow()
+{
+    delete calc;
 }
 
 void MainWindow::buttonClicked()
@@ -146,7 +152,6 @@ void MainWindow::calculate()
 
         QString historyText = inputBox->text() + " = " + resultText;
         history.addEntry(historyText.toStdString());
-        allHistory.append(historyText);
         historyList->addItem(historyText);
     }
     catch (const std::exception &e)
@@ -163,7 +168,6 @@ void MainWindow::clearInput()
 
 void MainWindow::clearHistory()
 {
-    history.clearHistory();
     historyList->clear();
 }
 
@@ -171,21 +175,20 @@ void MainWindow::viewHistory()
 {
     historyList->clear();
 
-    for (int i = 0; i < allHistory.size(); i++)
+    std::vector<std::string> savedHistory = history.getHistory();
+
+    for (int i = 0; i < savedHistory.size(); i++)
     {
-        historyList->addItem(allHistory.at(i));
+        historyList->addItem(QString::fromStdString(savedHistory[i]));
     }
 }
 
 void MainWindow::historyItemClicked(QListWidgetItem *item)
 {
     QString historyText = item->text();
-    int equalPosition = historyText.indexOf(" = ");
+    QString expression = historyText.section(" = ", 0, 0);
 
-    if (equalPosition != -1)
-    {
-        inputBox->setText(historyText.left(equalPosition));
-    }
+    inputBox->setText(expression);
 }
 
 void MainWindow::doSin()
