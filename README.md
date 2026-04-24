@@ -64,7 +64,10 @@ The program handles common errors like:
 
 * **Calculator**
 
-  * Handles basic math operations
+  * Base class with virtual functions for basic operations
+
+* **BasicCalculator
+  * Implements basic math operations
 
 * **AdvancedCalculator**
 
@@ -94,6 +97,13 @@ classDiagram
         +double subtract(double a, double b)
         +double multiply(double a, double b)
         +double divide(double a, double b)
+    }
+
+    class BasicCalculator {
+        +add()
+        +subtract()
+        +multiply()
+        +divide()
     }
 
     class AdvancedCalculator {
@@ -132,11 +142,13 @@ classDiagram
         +doSqrt()
     }
 
-    AdvancedCalculator --|> Calculator
-    ExpressionParser --> AdvancedCalculator : uses
-    MainWindow --> ExpressionParser : uses
-    MainWindow --> AdvancedCalculator : uses
-    MainWindow --> HistoryManager : uses
+    Calculator <|-- BasicCalculator
+    Calculator <|-- AdvancedCalculator
+    ExpressionParser --> AdvancedCalculator
+    MainWindow --> ExpressionParser
+    MainWindow --> HistoryManager
+    MainWindow --> AdvancedCalculator
+
 ```
 
 ---
@@ -146,6 +158,11 @@ classDiagram
 1. Open the project in Qt Creator
 2. Build the project
 3. Run it
+
+---
+
+## AI Use
+AI was used as a support tool to help review code structure, improve the README, and troubleshoot errors. The code was reviewed and understood by the team before submission.
 
 ---
 
